@@ -1,4 +1,4 @@
 # Hobbyists-network
-Repository for my Engineering Thesis
+My Engineering Thesis
 Front-end - Angular
 Back-end - .NET Core
