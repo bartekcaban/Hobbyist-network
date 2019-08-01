@@ -5,4 +5,11 @@
     <RootNamespace>Hobbyist_Network.Application</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
 </Project>

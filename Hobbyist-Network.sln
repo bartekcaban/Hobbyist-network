@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hobbyist-Network.WebAPI", "Hobbyist-Network.WebAPI\Hobbyist-Network.WebAPI.csproj", "{B258C23F-EE6B-45A6-B758-2926549CA512}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CD4A35B1-9AD4-40AD-8092-EFD5B8B2316B} = {CD4A35B1-9AD4-40AD-8092-EFD5B8B2316B}
+		{1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6} = {1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hobbyist-Network.Domain", "Hobbyist-Network.Domain\Hobbyist-Network.Domain.csproj", "{1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hobbyist-Network.Domain", "Hobbyist-Network.Domain\Hobbyist-Network.Domain.csproj", "{1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hobbyist-Network.Application", "Hobbyist-Network.Application\Hobbyist-Network.Application.csproj", "{CD4A35B1-9AD4-40AD-8092-EFD5B8B2316B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hobbyist-Network.Application", "Hobbyist-Network.Application\Hobbyist-Network.Application.csproj", "{CD4A35B1-9AD4-40AD-8092-EFD5B8B2316B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6} = {1B41A6F4-AD5F-4454-8312-CCAF8E0B6DF6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
