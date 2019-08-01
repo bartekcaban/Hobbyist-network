@@ -7,9 +7,7 @@ namespace Hobbyist_Network.Domain.Entities
     public class HobbyCategory : Entity
     {
         public string Name { get; set; }
-
-        public HobbyCategory() { }
-        public HobbyCategory(Guid id) : base(id) { }
+        
         public IEnumerable<Hobby> Hobbies => _hobbies.AsReadOnly();
         public IEnumerable<Event> Events => _events.AsReadOnly();
 

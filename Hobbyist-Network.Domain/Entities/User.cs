@@ -18,7 +18,7 @@ namespace Hobbyist_Network.Domain.Entities
         public string Description { get; set; }
         public IEnumerable<Contact> Contacts => _contacts.AsReadOnly();
         public IEnumerable<Hobby> Hobbies => _hobbies.AsReadOnly();
-        public IEnumerable<Event> OwnedEvents => _ownedEvents.AsReadOnly();
+        public IEnumerable<Event> OrganisedEvents => _organisedEvents.AsReadOnly();
 
         public User(Guid id, string firstName, string lastName, string password, string email) : base(id)
         {
@@ -32,6 +32,6 @@ namespace Hobbyist_Network.Domain.Entities
 
         private readonly List<Contact> _contacts = new List<Contact>();
         private readonly List<Hobby> _hobbies = new List<Hobby>();
-        private readonly List<Event> _ownedEvents = new List<Event>();
+        private readonly List<Event> _organisedEvents = new List<Event>();
     }
 }
