@@ -7,16 +7,22 @@ namespace Hobbyist_Network.Domain.Entities
     public class Contact : Entity
     {
         public DateTime Date { get; set; }
-        public User User1 { get; set; }
-        public Guid User1Id { get; set; }
-        public User User2 { get; set; }
-        public Guid User2Id { get; set; }
+        public bool Approved { get; set; }
+        public User User { get; set; }
+        public Guid UserId { get; set; }
+        public User MatchedUser { get; set; }
+        public Guid MatchedUserId { get; set; }
 
-        public Contact(Guid id, Guid user1Id, Guid user2Id) : base(id)
+        public Contact(Guid id, Guid userId, Guid matchedUserId) : base(id)
+        {
+            UserId = userId;
+            MatchedUserId = matchedUserId;
+        }
+
+        public void Match()
         {
             Date = DateTime.UtcNow;
-            User1Id = user1Id;
-            User2Id = user2Id;
+            Approved = true;
         }
 
         private Contact() { }

@@ -22,12 +22,12 @@ namespace Hobbyist_Network.Domain.Configuration
                    .HasForeignKey(e => e.OrganiserId);
 
             builder.HasMany(u => u.Contacts)
-                   .WithOne(c => c.User1)
-                   .HasForeignKey(c => c.User1Id);
+                   .WithOne(c => c.User)
+                   .HasForeignKey(c => c.UserId);
 
-            builder.HasMany(u => u.Contacts)
-                   .WithOne(c => c.User2)
-                   .HasForeignKey(c => c.User2Id);
+            builder.HasMany(u => u.MatchedContacts)
+                   .WithOne(c => c.MatchedUser)
+                   .HasForeignKey(c => c.MatchedUserId);
 
             builder.Metadata.FindNavigation(nameof(User.Hobbies))
                    .SetPropertyAccessMode(PropertyAccessMode.Field);
@@ -36,6 +36,9 @@ namespace Hobbyist_Network.Domain.Configuration
                    .SetPropertyAccessMode(PropertyAccessMode.Field);
 
             builder.Metadata.FindNavigation(nameof(User.Contacts))
+                   .SetPropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Metadata.FindNavigation(nameof(User.MatchedContacts))
                    .SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }

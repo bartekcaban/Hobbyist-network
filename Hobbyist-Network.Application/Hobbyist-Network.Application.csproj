@@ -12,4 +12,8 @@
     <Folder Include="Queries\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hobbyist-Network.Domain\Hobbyist-Network.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

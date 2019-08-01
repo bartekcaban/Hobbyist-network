@@ -18,4 +18,9 @@
     <Folder Include="Authentication\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hobbyist-Network.Application\Hobbyist-Network.Application.csproj" />
+    <ProjectReference Include="..\Hobbyist-Network.Domain\Hobbyist-Network.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

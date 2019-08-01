@@ -7,7 +7,7 @@ using Hobbyist_Network.Domain.Configuration;
 
 namespace Hobbyist_Network.Domain.DbContexts
 {
-    class Hobbyist_NetworkDbContext : DbContext
+    public class Hobbyist_NetworkDbContext : DbContext
     {
         public Hobbyist_NetworkDbContext(DbContextOptions<Hobbyist_NetworkDbContext> dbContextOptions) : base(dbContextOptions)
         {

@@ -12,14 +12,6 @@ namespace Hobbyist_Network.Domain.Configuration
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.HasKey(c => c.Id);
-
-            builder.HasOne(c => c.User1)
-                   .WithMany(u => u.Contacts)
-                   .HasForeignKey(c => c.User1Id);
-
-            builder.HasOne(c => c.User2)
-                   .WithMany(u => u.Contacts)
-                   .HasForeignKey(c => c.User2Id);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hobbyist_Network.WebAPI.Controllers
+namespace Domain.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
