@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hobbyist_Network.Application.Handlers
+namespace Hobbyist_Network.Application.Handlers.User
 {
-    public class RegisterUserCommandHandler : RequestHandler<RegisterUserCommand>
+    public class RegisterUserHandler : RequestHandler<RegisterUserCommand>
     {
         private Hobbyist_NetworkDbContext _dbContext;
 
-        public RegisterUserCommandHandler(Hobbyist_NetworkDbContext dbContext)
+        public RegisterUserHandler(Hobbyist_NetworkDbContext dbContext)
         {
             _dbContext = dbContext;
         }

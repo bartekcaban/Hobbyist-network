@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hobbyist_Network.Application.Commands.User;
+using Hobbyist_Network.Application.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,18 @@ namespace Hobbyist_Network.WebAPI.Controllers
             }
 
             return Ok(new { message = "Account created" });
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginUserQuery query)
+        {
+            var user = _mediator.Send(query);
+
+            if (user.Result == null)
+            {
+                return BadRequest("Wrong email or password");
+            }
+            return Ok(user);
         }
     }
 }

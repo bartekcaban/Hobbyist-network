@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using MediatR;
 using Hobbyist_Network.WebAPI.Infrastructure;
-using Hobbyist_Network.Application.Handlers;
+using Hobbyist_Network.Application.Handlers.User;
 
 namespace Hobbyist_Network.WebAPI
 {
@@ -36,8 +36,8 @@ namespace Hobbyist_Network.WebAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+            
+            services.AddMediatR(Assembly.Load(new AssemblyName("Hobbyist-Network.Application")));
 
             services.AddSwaggerGen(c =>
             {
