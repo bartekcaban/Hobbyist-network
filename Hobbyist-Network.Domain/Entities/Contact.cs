@@ -17,6 +17,7 @@ namespace Hobbyist_Network.Domain.Entities
         {
             UserId = userId;
             MatchedUserId = matchedUserId;
+            Approved = false;
         }
 
         public void Match()

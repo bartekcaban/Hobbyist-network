@@ -136,12 +136,12 @@ namespace Hobbyist_Network.Domain.Migrations
                     b.HasOne("Hobbyist_Network.Domain.Entities.User", "MatchedUser")
                         .WithMany("MatchedContacts")
                         .HasForeignKey("MatchedUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Hobbyist_Network.Domain.Entities.User", "User")
                         .WithMany("Contacts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Hobbyist_Network.Domain.Entities.Event", b =>

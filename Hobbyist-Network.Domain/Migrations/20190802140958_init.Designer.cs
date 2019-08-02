@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hobbyist_Network.Domain.Migrations
 {
     [DbContext(typeof(Hobbyist_NetworkDbContext))]
-    [Migration("20190801194152_init")]
+    [Migration("20190802140958_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,12 +138,12 @@ namespace Hobbyist_Network.Domain.Migrations
                     b.HasOne("Hobbyist_Network.Domain.Entities.User", "MatchedUser")
                         .WithMany("MatchedContacts")
                         .HasForeignKey("MatchedUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Hobbyist_Network.Domain.Entities.User", "User")
                         .WithMany("Contacts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Hobbyist_Network.Domain.Entities.Event", b =>

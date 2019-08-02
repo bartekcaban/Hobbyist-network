@@ -23,11 +23,13 @@ namespace Hobbyist_Network.Domain.Configuration
 
             builder.HasMany(u => u.Contacts)
                    .WithOne(c => c.User)
-                   .HasForeignKey(c => c.UserId);
+                   .HasForeignKey(c => c.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(u => u.MatchedContacts)
                    .WithOne(c => c.MatchedUser)
-                   .HasForeignKey(c => c.MatchedUserId);
+                   .HasForeignKey(c => c.MatchedUserId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.Metadata.FindNavigation(nameof(User.Hobbies))
                    .SetPropertyAccessMode(PropertyAccessMode.Field);

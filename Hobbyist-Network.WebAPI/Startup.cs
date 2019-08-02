@@ -13,6 +13,10 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Hobbyist_Network.Domain.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using MediatR;
+using Hobbyist_Network.WebAPI.Infrastructure;
+using Hobbyist_Network.Application.Handlers;
 
 namespace Hobbyist_Network.WebAPI
 {
@@ -33,6 +37,8 @@ namespace Hobbyist_Network.WebAPI
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Hobbyist-Network", Version = "v1" });
@@ -51,12 +57,14 @@ namespace Hobbyist_Network.WebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseSwagger();
 
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hobbyist-Network");
             });
+
+            AutoMapperConfiguration.Configure();
 
             app.UseHttpsRedirection();
             app.UseMvc();
