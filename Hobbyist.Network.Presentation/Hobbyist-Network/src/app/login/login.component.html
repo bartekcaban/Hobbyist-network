@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div class="background">
+  <mat-toolbar color="primary" >
+    <span>Hobbyist-Network</span>
+    <button mat-button (click)="openLoginDialog()" class="login-button">Zaloguj</button>
+  </mat-toolbar>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Witaj w aplikacji Hobbyist-Network!</mat-card-title>
+      <mat-card-subtitle>Poznawaj nowych ludzi o wspólnych zainteresowaniach!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button (click)="openRegisterDialog()">Zarejestruj</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
