@@ -15,11 +15,9 @@ function route (path, view, name) {
 
 Vue.use(Router);
 
-const router = new Router({
+export default new Router({
   mode: 'history',
   routes: paths.map(path => route(path.path, path.view, path.name)).concat([
     { path: '*', redirect: '/' }
   ]),
 })
-
-export default router;

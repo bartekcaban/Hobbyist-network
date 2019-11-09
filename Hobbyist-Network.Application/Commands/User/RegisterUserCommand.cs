@@ -1,7 +1,6 @@
-﻿using MediatR;
+﻿using Hobbyist_Network.Domain.Enums;
+using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hobbyist_Network.Application.Commands.User
 {
@@ -12,5 +11,10 @@ namespace Hobbyist_Network.Application.Commands.User
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public Gender Gender { get; set; }
+        public string City { get; set; }
+        public string Description { get; set; }
     }
 }

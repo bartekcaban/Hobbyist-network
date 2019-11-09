@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hobbyist_Network.Domain.Enums
+﻿namespace Hobbyist_Network.Domain.Enums
 {
     public enum Gender
     {
-        Female,
-        Male
+        Female = 1,
+        Male = 2
     }
 }

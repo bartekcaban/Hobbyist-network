@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hobbyist_Network.Domain.Enums
+﻿namespace Hobbyist_Network.Domain.Enums
 {
     public enum Level
     {
-        Beginner,
-        Intermediate,
-        Advanced,
-        Proffesional
+        Beginner = 1,
+        Intermediate = 2,
+        Advanced = 3,
+        Proffesional = 4
     }
 }

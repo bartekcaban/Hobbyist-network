@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Hobbyist_Network.Application.Commands.User;
+﻿using Hobbyist_Network.Application.Commands.User;
 using Hobbyist_Network.Application.Queries.User;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Hobbyist_Network.WebAPI.Controllers
 {
-    [Route("api/")]
+    [Route("api/user")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -35,8 +30,8 @@ namespace Hobbyist_Network.WebAPI.Controllers
             return Ok(new { message = "Account created" });
         }
 
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginUserQuery query)
+        [HttpGet("login")]
+        public IActionResult Login([FromQuery] LoginUserQuery query)
         {
             var user = _mediator.Send(query);
 
@@ -45,6 +40,20 @@ namespace Hobbyist_Network.WebAPI.Controllers
                 return BadRequest("Wrong email or password");
             }
             return Ok(user);
+        }
+        [HttpPut("update")]
+        public IActionResult EditUser(Guid id, [FromBody] UpdateUserCommand command)
+        {
+            command.Id = id;
+
+            var commandResult = _mediator.Send(command);
+
+            if (commandResult.IsFaulted)
+            {
+                return BadRequest(commandResult.Exception.InnerException.Message);
+            }
+
+            return Ok(new { message = "User updated" });
         }
     }
 }

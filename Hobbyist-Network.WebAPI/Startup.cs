@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Hobbyist_Network.Domain.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using MediatR;
 using Hobbyist_Network.WebAPI.Infrastructure;
-using Hobbyist_Network.Application.Handlers.User;
 
 namespace Hobbyist_Network.WebAPI
 {
     public class Startup
     {
+        private const string AllowOrigins = "_allowOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +26,18 @@ namespace Hobbyist_Network.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
             services.AddDbContext<Hobbyist_NetworkDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -57,6 +63,8 @@ namespace Hobbyist_Network.WebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(AllowOrigins);
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
