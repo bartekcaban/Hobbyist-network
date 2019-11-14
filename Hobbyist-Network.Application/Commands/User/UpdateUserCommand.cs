@@ -14,5 +14,7 @@ namespace Hobbyist_Network.Application.Commands.User
         public Gender Gender { get; set; }
         public string City { get; set; }
         public string Description { get; set; }
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
     }
 }

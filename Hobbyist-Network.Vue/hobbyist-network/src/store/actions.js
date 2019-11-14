@@ -1,4 +1,5 @@
 import service from './service/service';
+import dateFormat from '@/shared/moment';
 
 export default {
   async registerUser(state, user) {
@@ -6,6 +7,7 @@ export default {
   },
   async loginUser({ commit }, user) {
     const result = await service.loginUser(user);
+    result.dateOfBirth = dateFormat(result.dateOfBirth);
     commit('setCurrentUserInLocalStorage', result);
     commit('setCurrentUser', result);
   },
@@ -16,5 +18,8 @@ export default {
   async updateUser({ commit }, user) {
     await service.updateUser(user);
     commit('setCurrentUserInLocalStorage', user);
+  },
+  async changePassword(state, user) {
+    await service.changePassword(user);
   },
 };

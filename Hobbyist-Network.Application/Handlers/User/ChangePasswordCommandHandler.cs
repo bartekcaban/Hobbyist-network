@@ -6,25 +6,25 @@ using System.Linq;
 
 namespace Hobbyist_Network.Application.Handlers.User
 {
-    public class UpdateUserCommandHandler : RequestHandler<UpdateUserCommand>
+    public class ChangePasswordCommandHandler : RequestHandler<ChangePasswordCommand>
     {
         private Hobbyist_NetworkDbContext _dbContext;
 
-        public UpdateUserCommandHandler(Hobbyist_NetworkDbContext dbContext)
+        public ChangePasswordCommandHandler(Hobbyist_NetworkDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        protected override void Handle(UpdateUserCommand request)
+        protected override void Handle(ChangePasswordCommand request)
         {
             var user = _dbContext.Users
                 .FirstOrDefault(e => e.Id == request.Id);
 
-            user.Update(request.FirstName, request.LastName, request.Gender, request.City, request.PhoneNumber, request.Description, request.DateOfBirth, request.Instagram, request.Facebook);
+            user.ChangePassword(request.Password);
 
             if (_dbContext.SaveChanges() == 0)
             {
-                throw new Exception("Could not update user");
+                throw new Exception("Could not change password");
             }
         }
     }

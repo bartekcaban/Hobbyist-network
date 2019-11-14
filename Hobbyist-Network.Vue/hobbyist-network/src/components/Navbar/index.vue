@@ -60,10 +60,10 @@ export default {
       }
     },
     signOut() {
-      this.setSignOut();
       this.$router.push({
         name: 'Home',
       });
+      this.setSignOut();
     },
   },
 }

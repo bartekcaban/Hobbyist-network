@@ -1,20 +1,21 @@
 <template>
   <v-dialog
     max-width="400"
-    v-model="loginDialog"
+    v-model="changePasswordDialog"
     persistent
   >
     <v-card>
       <v-card-title class="headline title">
-        Zaloguj się
+        Zmień hasło
       </v-card-title>
       <v-card-text>
         <v-text-field
-          label="Email"
-          v-model="email"
+          label="Obecne hasło"
+          type="password"
+          v-model="currentPassword"
         ></v-text-field>
         <v-text-field
-          label="Hasło"
+          label="Nowe Hasło"
           type="password"
           v-model="password"
         ></v-text-field>
@@ -28,8 +29,8 @@
         </v-btn>
         <v-btn
           color="primary"
-          @click="login"
-        >Zaloguj się
+          @click="save"
+        >Zapisz
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -37,29 +38,31 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'Login',
+  name: 'ChangePassword',
   data: () => ({
-    email: '',
     password: '',
+    currentPassword: '',
   }),
   props: {
-    loginDialog: Boolean,
+    changePasswordDialog: Boolean,
   },
   methods: {
-    ...mapActions(['loginUser']),
-    async login() {
-      await this.loginUser({ email: this.email, password: this.password });
-      this.$router.push({
-        name: 'Main',
-      });
-      this.$emit('close');
+    ...mapActions(['changePassword']),
+    async save() {
+      await this.changePassword({ id: this.currentUser.id, password: this.password, currentPassword: this.currentPassword });
+      this.close();
     },
     close() {
+      this.currentPassword = '';
+      this.password = '';
       this.$emit('close');
     },
+  },
+  computed: {
+...mapGetters(['currentUser']),
   },
 }
 </script>
@@ -69,6 +72,6 @@ export default {
 
 .title {
   color: white;
-  background-color: $primary;
+  background-color: $secondary;
 }
 </style>

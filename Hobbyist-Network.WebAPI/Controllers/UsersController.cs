@@ -2,7 +2,6 @@
 using Hobbyist_Network.Application.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Hobbyist_Network.WebAPI.Controllers
 {
@@ -41,11 +40,10 @@ namespace Hobbyist_Network.WebAPI.Controllers
             }
             return Ok(user);
         }
-        [HttpPut("update")]
-        public IActionResult EditUser(Guid id, [FromBody] UpdateUserCommand command)
-        {
-            command.Id = id;
 
+        [HttpPost("update")]
+        public IActionResult EditUser([FromBody] UpdateUserCommand command)
+        {
             var commandResult = _mediator.Send(command);
 
             if (commandResult.IsFaulted)
@@ -54,6 +52,19 @@ namespace Hobbyist_Network.WebAPI.Controllers
             }
 
             return Ok(new { message = "User updated" });
+        }
+
+        [HttpPost("change-password")]
+        public IActionResult ChangePassword([FromBody] ChangePasswordCommand command)
+        {
+            var commandResult = _mediator.Send(command);
+
+            if (commandResult.IsFaulted)
+            {
+                return BadRequest(commandResult.Exception.InnerException.Message);
+            }
+
+            return Ok(new { message = "Password changed" });
         }
     }
 }

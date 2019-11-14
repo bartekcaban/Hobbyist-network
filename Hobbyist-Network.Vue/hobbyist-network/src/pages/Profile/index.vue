@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import Hobbies from './components/Hobbies';
 import UserDetails from './components/UserDetails';
 import ProfileView from './components/ProfileView';
@@ -55,11 +57,16 @@ export default {
       tab: null,
     }
   },
+  methods: {
+    ...mapActions(['getUserDetails']),
+  },
+  async created() {
+    await this.getUserDetails();
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-
 .card-left {
   margin-left: 10px;
 }

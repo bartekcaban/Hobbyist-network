@@ -144,6 +144,8 @@
 <script>
 import { mapActions } from 'vuex';
 
+import { GENDERS } from '@/shared/constants';
+
 export default {
   name: 'Register',
   data: () => ({
@@ -160,7 +162,7 @@ export default {
     phoneNumber: '',
     userDetailsDialog: false,
     menu: false,
-    genders: [ { text: 'Kobieta', value: 1 }, { text: 'Mężczyzna', value: 2 } ],
+    genders: GENDERS,
   }),
   watch: {
     menu(val) {

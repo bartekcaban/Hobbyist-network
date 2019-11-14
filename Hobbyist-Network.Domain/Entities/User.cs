@@ -1,7 +1,6 @@
 ﻿using Hobbyist_Network.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Hobbyist_Network.Domain.Entities
 {
@@ -16,6 +15,8 @@ namespace Hobbyist_Network.Domain.Entities
         public Gender? Gender { get; set; }
         public string City { get; set; }
         public string Description { get; set; }
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
         public IEnumerable<Contact> Contacts => _contacts.AsReadOnly();
 
         public IEnumerable<Contact> MatchedContacts => _matchedContacts.AsReadOnly();
@@ -35,7 +36,7 @@ namespace Hobbyist_Network.Domain.Entities
             DateOfBirth = dateOfBirth;
         }
 
-        public void Update(string firstName, string lastName, Gender gender, string city, string phoneNumber, string description, DateTime dateOfBirth)
+        public void Update(string firstName, string lastName, Gender gender, string city, string phoneNumber, string description, DateTime dateOfBirth, string instagram, string facebook)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -44,6 +45,13 @@ namespace Hobbyist_Network.Domain.Entities
             Description = description;
             PhoneNumber = phoneNumber;
             DateOfBirth = dateOfBirth;
+            Instagram = instagram;
+            Facebook = facebook;
+        }
+
+        public void ChangePassword(string password)
+        {
+            Password = password;
         }
 
         private User() { }

@@ -26,8 +26,9 @@ export default {
     return result.data.result;
   },
   async updateUser(user) {
-    const resource = `/user/update/${user.id}`;
-    const result = await client.put(resource, {
+    const resource = '/user/update';
+    const result = await client.post(resource, {
+      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       description: user.description,
@@ -35,6 +36,15 @@ export default {
       city: user.city,
       dateOfBirth: user.dateOfBirth,
       phoneNumber: user.phoneNumber,
+    });
+    return result.data.result;
+  },
+  async changePassword(user) {
+    const resource = '/user/change-password';
+    const result = await client.post(resource, {
+      id: user.id,
+      password: user.password,
+      currentPassword: user.currentPassword,
     });
     return result.data.result;
   },

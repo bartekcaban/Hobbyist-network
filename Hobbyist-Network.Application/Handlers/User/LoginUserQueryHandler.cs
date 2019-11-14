@@ -3,10 +3,7 @@ using Hobbyist_Network.Application.DTOs.User;
 using Hobbyist_Network.Application.Queries.User;
 using Hobbyist_Network.Domain.DbContexts;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Hobbyist_Network.Application.Handlers.User
 {
