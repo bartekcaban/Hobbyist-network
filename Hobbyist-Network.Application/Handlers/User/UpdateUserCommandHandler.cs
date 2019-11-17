@@ -18,7 +18,7 @@ namespace Hobbyist_Network.Application.Handlers.User
         protected override void Handle(UpdateUserCommand request)
         {
             var user = _dbContext.Users
-                .FirstOrDefault(e => e.Id == request.Id);
+                .FirstOrDefault(u => u.Id == request.Id);
 
             user.Update(request.FirstName, request.LastName, request.Gender, request.City, request.PhoneNumber, request.Description, request.DateOfBirth, request.Instagram, request.Facebook);
 

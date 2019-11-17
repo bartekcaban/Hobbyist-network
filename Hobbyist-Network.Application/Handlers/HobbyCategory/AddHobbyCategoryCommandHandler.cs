@@ -21,7 +21,7 @@ namespace Hobbyist_Network.Application.Handlers.User
 
             if (_dbContext.SaveChanges() == 0)
             {
-                throw new Exception("Could add category");
+                throw new Exception("Could not add category");
             }
         }
     }

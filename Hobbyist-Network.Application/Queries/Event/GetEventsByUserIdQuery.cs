@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Hobbyist_Network.Application.DTOs.Event;
+using MediatR;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Hobbyist_Network.Application.Queries.Event
 {
-    class GetEventsByUserIdQuery
+    public class GetEventsByUserIdQuery : IRequest<IEnumerable<EventDto>>
     {
+        public Guid UserId { get; set; }
     }
 }

@@ -36,6 +36,8 @@ export default {
       city: user.city,
       dateOfBirth: user.dateOfBirth,
       phoneNumber: user.phoneNumber,
+      instagram: user.instagram,
+      facebook: user.facebook,
     });
     return result.data.result;
   },

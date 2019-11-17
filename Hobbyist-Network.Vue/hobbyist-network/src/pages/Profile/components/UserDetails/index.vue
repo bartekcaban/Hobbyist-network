@@ -82,12 +82,14 @@
         <v-col>
           <v-text-field
             label="Instagram (link)"
+            prepend-icon="mdi-instagram"
             v-model="currentUser.instagram"
           ></v-text-field>
         </v-col>
         <v-col>
           <v-text-field
             label="Facebook (link)"
+            prepend-icon="mdi-facebook"
             v-model="currentUser.facebook"
           ></v-text-field>
         </v-col>

@@ -1,9 +1,10 @@
 ﻿using Hobbyist_Network.Domain.Enums;
+using MediatR;
 using System;
 
-namespace Hobbyist_Network.Application.DTOs.Hobby
+namespace Hobbyist_Network.Application.Commands.Hobby
 {
-    public class HobbyDto
+    public class UpdateHobbyCommand : IRequest
     {
         public Guid Id { get; set; }
         public string Description { get; set; }

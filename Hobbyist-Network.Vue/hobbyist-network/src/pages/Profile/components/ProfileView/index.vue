@@ -23,16 +23,38 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row><v-card color="secondary">
       <v-col>
-        <v-chip class="hobby">
-          <v-icon left>mdi-gamepad-variant</v-icon>
+        
+        <v-chip color="primary" class="hobby">
+          <v-icon left>mdi-fountain-pen</v-icon>
+          <v-icon left>mdi-brush</v-icon>
+          <v-icon left>mdi-brush</v-icon>
+          <v-icon left>mdi-brush</v-icon>
           Koszykówka
+          <v-avatar
+            right
+            color="primary"
+          >
+            1
+          </v-avatar>
         </v-chip>
-        <v-chip class="hobby">
+        <v-chip color="primary" class="hobby">
           <v-icon left>mdi-gamepad-variant</v-icon>
           Szachy
         </v-chip>
+      </v-col></v-card>
+    </v-row>
+    <v-row>
+      <v-col v-if="currentUser.instagram">
+        <v-icon class="instagram-icon">mdi-instagram</v-icon>
+        <a :href="currentUser.instagram">{{currentUser.instagram}}</a>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="currentUser.facebook">
+        <v-icon class="facebook-icon">mdi-facebook</v-icon>
+        <a :href="currentUser.instagram">{{currentUser.facebook}}</a>
       </v-col>
     </v-row>
   </div>
@@ -80,6 +102,15 @@ export default {
   padding-right: 10px;
 }
 .hobby {
+  transform: rotate(-180deg);
   margin-right: 10px;
+}
+.facebook-icon {
+  color: blue;
+  margin-right: 5px;
+}
+.instagram-icon {
+  color: red;
+  margin-right: 5px;
 }
 </style>

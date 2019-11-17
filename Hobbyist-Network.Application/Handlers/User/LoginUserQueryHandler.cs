@@ -3,6 +3,7 @@ using Hobbyist_Network.Application.DTOs.User;
 using Hobbyist_Network.Application.Queries.User;
 using Hobbyist_Network.Domain.DbContexts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Hobbyist_Network.Application.Handlers.User
@@ -18,8 +19,8 @@ namespace Hobbyist_Network.Application.Handlers.User
 
         protected override UserDto Handle(LoginUserQuery request)
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Email == request.Email &&
-                                                   u.Password == request.Password);
+            var user = _dbContext.Users.Include(u => u.Hobbies)
+                .FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
 
             return user == null ? null : Mapper.Map<UserDto>(user);
         }

@@ -20,6 +20,13 @@ namespace Hobbyist_Network.Domain.Entities
             Level = level;
         }
 
+        public void Update(string description, Guid categoryId, Level level)
+        {
+            Description = description;
+            CategoryId = categoryId;
+            Level = level;
+        }
+
         /*protected override Dictionary<Level, string> LevelDictionary => levelDictionary;
 
         private readonly Dictionary<Level, string> levelDictionary = new Dictionary<Level, string>()

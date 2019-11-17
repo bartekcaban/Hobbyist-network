@@ -1,7 +1,7 @@
-﻿using Hobbyist_Network.Domain.Enums;
+﻿using Hobbyist_Network.Application.DTOs.Hobby;
+using Hobbyist_Network.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Hobbyist_Network.Application.DTOs.User
 {
@@ -18,5 +18,6 @@ namespace Hobbyist_Network.Application.DTOs.User
         public string Description { get; set; }
         public string Instagram { get; set; }
         public string Facebook { get; set; }
+        public IEnumerable<HobbyDto> Hobbies { get; set; }
     }
 }
