@@ -8,19 +8,19 @@ using System.Linq;
 
 namespace Hobbyist_Network.Application.Handlers.User
 {
-    public class LoginUserQueryHandler : RequestHandler<LoginUserQuery, UserDto>
+    public class GetUserByIdQueryHandler : RequestHandler<GetUserByIdQuery, UserDto>
     {
         private Hobbyist_NetworkDbContext _dbContext;
 
-        public LoginUserQueryHandler(Hobbyist_NetworkDbContext dbContext)
+        public GetUserByIdQueryHandler(Hobbyist_NetworkDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        protected override UserDto Handle(LoginUserQuery request)
+        protected override UserDto Handle(GetUserByIdQuery request)
         {
-            var user = _dbContext.Users.Include(u => u.Hobbies).ThenInclude(h =>h.Category)
-                .FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
+            var user = _dbContext.Users.Include(u => u.Hobbies).ThenInclude(h => h.Category)
+                .FirstOrDefault(u => u.Id == request.Id);
 
             return user == null ? null : Mapper.Map<UserDto>(user);
         }

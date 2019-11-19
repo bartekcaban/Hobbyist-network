@@ -50,4 +50,42 @@ export default {
     });
     return result.data.result;
   },
+  async getHobbyCategories() {
+    const resource = '/hobby-category/get';
+    const result = await client.get(resource);
+    return result.data.result;
+  },
+  async addHobby(hobby) {
+    const resource = '/hobby/add';
+    const result = await client.post(resource, {
+      userId: hobby.userId,
+      categoryId: hobby.categoryId,
+      level: hobby.level,
+      description: hobby.description,
+    });
+    return result.data.result;
+  },
+  async editHobby(hobby) {
+    const resource = '/hobby/update';
+    const result = await client.post(resource, {
+      id: hobby.id,
+      userId: hobby.userId,
+      categoryId: hobby.categoryId,
+      level: hobby.level,
+      description: hobby.description,
+    });
+    return result.data.result;
+  },
+  async deleteHobby(id) {
+    const resource = `/hobby/delete?id=${id}`;
+    const result = await client.delete(resource);
+    return result.data.result;
+  },
+  async getUserById(id) {
+    const resource = '/user/get';
+    const result = await client.get(resource, {
+      id
+    });
+    return result.data.result;
+  },
 };

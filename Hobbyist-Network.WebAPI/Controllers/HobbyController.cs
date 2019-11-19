@@ -42,7 +42,7 @@ namespace Hobbyist_Network.WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete([FromBody] DeleteHobbyCommand command)
+        public IActionResult Delete([FromQuery] DeleteHobbyCommand command)
         {
             var commandResult = _mediator.Send(command);
 

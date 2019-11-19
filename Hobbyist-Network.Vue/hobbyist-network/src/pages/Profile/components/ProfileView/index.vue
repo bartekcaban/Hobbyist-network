@@ -23,27 +23,36 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row><v-card color="secondary">
+    <v-row>
       <v-col>
-        
-        <v-chip color="primary" class="hobby">
-          <v-icon left>mdi-fountain-pen</v-icon>
-          <v-icon left>mdi-brush</v-icon>
-          <v-icon left>mdi-brush</v-icon>
-          <v-icon left>mdi-brush</v-icon>
-          Koszykówka
-          <v-avatar
-            right
-            color="primary"
-          >
-            1
-          </v-avatar>
+        <v-chip
+          color="primary"
+          class="hobby"
+          v-for="hobby in currentUser.hobbies"
+          v-bind:key="hobby.id"
+        >
+          <v-icon left>{{hobby.categoryIcon}}</v-icon>
+          {{hobby.categoryName}}
+          <div v-if="hobby.level === 1">
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+          </div>
+          <div v-if="hobby.level === 2">
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+          </div>
+          <div v-if="hobby.level === 3">
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+          </div>
+          <div v-if="hobby.level === 4">
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+            <v-icon right class="level-icon">mdi-brush</v-icon>
+          </div>
         </v-chip>
-        <v-chip color="primary" class="hobby">
-          <v-icon left>mdi-gamepad-variant</v-icon>
-          Szachy
-        </v-chip>
-      </v-col></v-card>
+      </v-col>
     </v-row>
     <v-row>
       <v-col v-if="currentUser.instagram">
@@ -102,8 +111,13 @@ export default {
   padding-right: 10px;
 }
 .hobby {
-  transform: rotate(-180deg);
   margin-right: 10px;
+  margin-bottom: 10px;
+  padding-right: 30px;
+}
+.level-icon {
+  transform: rotate(-180deg);
+  margin-right: -20px;
 }
 .facebook-icon {
   color: blue;

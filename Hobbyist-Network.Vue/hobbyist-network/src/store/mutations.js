@@ -10,4 +10,10 @@ export default {
     localStorage.clear();
     state.currentUser = {};
   },
+  setHobbyCategories(state, categories) {
+    state.hobbyCategories = categories;
+  },
+  addHobbyToList(state, hobby) {
+    state.currentUser.hobbies.push(hobby);
+  },
 };

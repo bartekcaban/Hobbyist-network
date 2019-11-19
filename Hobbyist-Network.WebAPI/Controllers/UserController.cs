@@ -41,6 +41,18 @@ namespace Hobbyist_Network.WebAPI.Controllers
             return Ok(user);
         }
 
+        [HttpGet("get")]
+        public IActionResult GetById([FromQuery] GetUserByIdQuery query)
+        {
+            var user = _mediator.Send(query);
+
+            if (user.Result == null)
+            {
+                return BadRequest("Error");
+            }
+            return Ok(user);
+        }
+
         [HttpPost("update")]
         public IActionResult EditUser([FromBody] UpdateUserCommand command)
         {
