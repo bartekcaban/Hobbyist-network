@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MediatR;
+using System;
 
-namespace Hobbyist_Network.Application.DTOs.Event
+namespace Hobbyist_Network.Application.Commands.Event
 {
-    public class EventDto
+    public class UpdateEventCommand : IRequest
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -10,9 +11,6 @@ namespace Hobbyist_Network.Application.DTOs.Event
         public string Localization { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Guid OrganiserId { get; set; }
-        public string CategoryName { get; set; }
-        public string CategoryIcon { get; set; }
         public Guid CategoryId { get; set; }
     }
 }

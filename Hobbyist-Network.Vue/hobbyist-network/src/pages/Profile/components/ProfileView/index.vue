@@ -25,33 +25,42 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-chip
-          color="primary"
-          class="hobby"
+        <v-tooltip
+          :disabled="!hobby.description"
+          top
           v-for="hobby in currentUser.hobbies"
           v-bind:key="hobby.id"
         >
-          <v-icon left>{{hobby.categoryIcon}}</v-icon>
-          {{hobby.categoryName}}
-          <div v-if="hobby.level === 1">
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-          </div>
-          <div v-if="hobby.level === 2">
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-          </div>
-          <div v-if="hobby.level === 3">
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-          </div>
-          <div v-if="hobby.level === 4">
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-            <v-icon right class="level-icon">mdi-brush</v-icon>
-          </div>
-        </v-chip>
+          <template v-slot:activator="{ on }">
+            <v-chip
+              color="primary"
+              class="hobby"
+              v-on="on"
+            >
+              <v-icon left>{{hobby.categoryIcon}}</v-icon>
+              {{hobby.categoryName}}
+              <div v-if="hobby.level === 1">
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+              </div>
+              <div v-if="hobby.level === 2">
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+              </div>
+              <div v-if="hobby.level === 3">
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+              </div>
+              <div v-if="hobby.level === 4">
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+                <v-icon right class="level-icon">mdi-brush</v-icon>
+              </div>
+            </v-chip>
+          </template>
+          <span>{{hobby.description}}</span>
+        </v-tooltip>
       </v-col>
     </v-row>
     <v-row>

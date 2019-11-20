@@ -16,7 +16,7 @@ namespace Hobbyist_Network.WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Register([FromBody] AddHobbyCommand command)
+        public IActionResult Add([FromBody] AddHobbyCommand command)
         {
             var commandResult = _mediator.Send(command);
 

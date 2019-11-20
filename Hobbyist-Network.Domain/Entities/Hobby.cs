@@ -27,16 +27,6 @@ namespace Hobbyist_Network.Domain.Entities
             Level = level;
         }
 
-        /*protected override Dictionary<Level, string> LevelDictionary => levelDictionary;
-
-        private readonly Dictionary<Level, string> levelDictionary = new Dictionary<Level, string>()
-        {
-            {Level.Beginner, "BEG" },
-            {Level.Intermediate, "INT" },
-            {Level.Advanced, "ADV" },
-            {Level.Proffesional, "PRO" }
-        };*/
-
         private Hobby() { }
     }
 }

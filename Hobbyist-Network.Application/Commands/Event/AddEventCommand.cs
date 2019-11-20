@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using System;
 
 namespace Hobbyist_Network.Application.Commands.Event
 {
-    class AddEventCommand
+    public class AddEventCommand : IRequest
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Localization { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public Guid OrganiserId { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Hobbyist_Network.WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Register([FromBody] AddHobbyCategoryCommand command)
+        public IActionResult Add([FromBody] AddHobbyCategoryCommand command)
         {
             var commandResult = _mediator.Send(command);
 
@@ -30,7 +30,7 @@ namespace Hobbyist_Network.WebAPI.Controllers
         }
 
         [HttpGet("get")]
-        public IActionResult Login([FromQuery] GetHobbyCategoriesQuery query)
+        public IActionResult Get([FromQuery] GetHobbyCategoriesQuery query)
         {
             var categories = _mediator.Send(query);
 

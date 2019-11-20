@@ -14,5 +14,15 @@ export default [
     name: 'Profile',
     view: 'Profile',
   },
+  {
+    path: '/events',
+    name: 'Events',
+    view: 'Events',
+  },
+  {
+    path: '/people',
+    name: 'People',
+    view: 'People',
+  },
 ];
   

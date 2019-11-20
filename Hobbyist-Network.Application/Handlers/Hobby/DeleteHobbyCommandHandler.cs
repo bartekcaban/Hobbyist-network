@@ -4,7 +4,7 @@ using MediatR;
 using System;
 using System.Linq;
 
-namespace Hobbyist_Network.Application.Handlers.User
+namespace Hobbyist_Network.Application.Handlers.Hobby
 {
     public class DeleteHobbyCommandHandler : RequestHandler<DeleteHobbyCommand>
     {

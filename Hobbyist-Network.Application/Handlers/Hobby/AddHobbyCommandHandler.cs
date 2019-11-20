@@ -3,7 +3,7 @@ using Hobbyist_Network.Domain.DbContexts;
 using MediatR;
 using System;
 
-namespace Hobbyist_Network.Application.Handlers.User
+namespace Hobbyist_Network.Application.Handlers.Hobby
 {
     public class AddHobbyCommandHandler : RequestHandler<AddHobbyCommand>
     {

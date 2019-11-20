@@ -25,6 +25,16 @@ namespace Hobbyist_Network.Domain.Entities
             CategoryId = categoryId;
         }
 
+        public void Update(string name, string description, string localization, DateTime startDate, DateTime endDate, Guid categoryId)
+        {
+            Name = name;
+            Description = description;
+            Localization = localization;
+            StartDate = startDate;
+            EndDate = endDate;
+            CategoryId = categoryId;
+        }
+
         private Event() { }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using System;
 
 namespace Hobbyist_Network.Application.Commands.Event
 {
-    class DeleteEventCommand
+    public class DeleteEventCommand : IRequest
     {
+        public Guid Id { get; set; }
     }
 }
