@@ -16,4 +16,10 @@ export default {
   addHobbyToList(state, hobby) {
     state.currentUser.hobbies.push(hobby);
   },
+  setEvents(state, events) {
+    state.events = events;
+  },
+  setCurrentUserEvents(state, events) {
+    state.currentUserEvents = events;
+  },
 };

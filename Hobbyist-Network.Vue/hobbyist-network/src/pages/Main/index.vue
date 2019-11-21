@@ -81,6 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/colors.scss';
+
 .card-left {
   margin-left: 20px;
   width: 45rem;

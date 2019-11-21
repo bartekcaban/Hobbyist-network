@@ -88,4 +88,47 @@ export default {
     });
     return result.data.result;
   },
+  async getEventsByUserId(userId) {
+    const resource = '/event/get-by-user-id';
+    const result = await client.get(resource, {
+      userId
+    });
+    return result.data.result;
+  },
+  async getEvents() {
+    const resource = '/event/get';
+    const result = await client.get(resource);
+    return result.data.result;
+  },
+  async deleteEvent(id) {
+    const resource = `/event/delete?id=${id}`;
+    const result = await client.delete(resource);
+    return result.data.result;
+  },
+  async addEvent(event) {
+    const resource = '/event/add';
+    const result = await client.post(resource, {
+      name: event.name,
+      description: event.description,
+      localization: event.localization,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      organiserId: event.organiserId,
+      categoryId: event.categoryId,
+    });
+    return result.data.result;
+  },
+  async editEvent(event) {
+    const resource = '/event/update';
+    const result = await client.post(resource, {
+      id: event.id,
+      name: event.name,
+      description: event.description,
+      localization: event.localization,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      categoryId: event.categoryId,
+    });
+    return result.data.result;
+  },
 };

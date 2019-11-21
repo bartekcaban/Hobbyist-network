@@ -3,6 +3,7 @@ using Hobbyist_Network.Application.DTOs.Event;
 using Hobbyist_Network.Application.Queries.Event;
 using Hobbyist_Network.Domain.DbContexts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace Hobbyist_Network.Application.Handlers.Event
@@ -18,7 +19,7 @@ namespace Hobbyist_Network.Application.Handlers.Event
 
         protected override IEnumerable<EventDto> Handle(GetEventsQuery request)
         {
-            var events = _dbContext.Events;
+            var events = _dbContext.Events.Include(e => e.Category).Include(e => e.Organiser);
 
             return Mapper.Map<IEnumerable<EventDto>>(events);
         }

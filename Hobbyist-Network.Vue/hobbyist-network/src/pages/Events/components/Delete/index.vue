@@ -1,8 +1,4 @@
 <template>
-  <v-layout
-      justify-center
-      wrap
-    >
     <v-dialog
       v-model="dialog"
       width="500"
@@ -21,7 +17,7 @@
         <v-card-text>
           <v-row>
             <v-col class="text-center title">
-              Czy na pewno chcesz usunąć to hobby?
+              Czy na pewno chcesz usunąć to wydarzenie?
             </v-col>
           </v-row>
         </v-card-text>
@@ -34,37 +30,33 @@
           </v-btn>
           <v-btn
             color="primary"
-            @click="deleteH"
+            @click="deleteE"
           >
             Tak
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
-  name: 'DeleteHobby',
+  name: 'DeleteEvent',
   data () {
     return {
       dialog: false,
     }
   },
   props: {
-    hobby: null,
-  },
-  computed: {
-    ...mapGetters(['currentUser']),
+    event: Object,
   },
   methods: {
-    ...mapActions(['deleteHobby', 'getCurrentUser']),
-    async deleteH() {
-      await this.deleteHobby(this.hobby.id);
-      await this.getCurrentUser(this.currentUser.id);
+    ...mapActions(['deleteEvent', 'getEvents']),
+    async deleteE() {
+      await this.deleteEvent(this.event.id);
+      await this.getEvents();
       this.cancel();
     },
     cancel() {
