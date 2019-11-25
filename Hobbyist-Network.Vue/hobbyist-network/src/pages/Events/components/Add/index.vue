@@ -210,7 +210,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['addEvent', 'getEvents']),
+    ...mapActions(['addEvent', 'getEvents', 'getCurrentUserEvents']),
     saveStartDate() {
       this.datePickerStart = false;
       this.timePickerStart = true;
@@ -240,6 +240,7 @@ export default {
         endDate: this.endDateTime,
       });
       await this.getEvents();
+      await this.getCurrentUserEvents(this.currentUser.id);
       this.cancel();
     },
     cancel() {

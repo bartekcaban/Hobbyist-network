@@ -11,6 +11,24 @@
             >
               <v-toolbar-title>Wydarzenia</v-toolbar-title>
               <v-spacer></v-spacer>
+              <div v-if="!currentUserEventsShown" class="select">
+                <v-select
+                  v-model="category"
+                  :items="hobbyCategories"
+                  item-text="name"
+                  item-value="id"
+                ></v-select>
+              </div>
+              <div v-if="!currentUserEventsShown">
+                <v-btn
+                  text
+                  color="primary"
+                  :disabled="!category"
+                  @click="filter"
+                >
+                  Pokaż
+                </v-btn>
+              </div>
               <v-btn
                 text
                 @click="getAllEvents"
@@ -20,47 +38,77 @@
               <v-btn
                 text
                 @click="showCurrentUserEvents"
+                :disabled="currentUserEventsShown"
               >
                 Moje
               </v-btn>
-              <v-btn
-                icon
-                text
-              >
-                <Add/>
-              </v-btn>
+              <Add/>
             </v-toolbar>
           </v-col>
-          <v-col
-            v-for="event in events"
-            v-bind:key="event.id"
-            cols="3"
-          >
-            <v-card color="primary" dark height="240">
-              <v-card-title class="title">
-                <v-col cols="11" class="cols">
-                  {{event.name}}
-                </v-col>
-                <v-col cols="1" class="cols">
-                  <v-icon class="icon">{{event.categoryIcon}}</v-icon>
-                </v-col>
-                <div v-if="!currentUserIsOrganiser(event)" class="subtitle-2 organiser">by {{event.organiserFirstName}}</div>
-                <v-row v-if="currentUserIsOrganiser(event)" class="subtitle-2 organiser">
-                  by you
-                  <v-row class="actions">
-                    <Edit :event="event"/>
-                    <Delete :event="event"/>
+          <v-row class="grid" v-if="!currentUserEventsShown">
+            <v-col
+              v-for="event in filteredEvents"
+              v-bind:key="event.id"
+              cols="3"
+            >
+              <v-card color="primary" dark height="240">
+                <v-card-title class="title">
+                  <v-col cols="11" class="cols">
+                    {{event.name}}
+                  </v-col>
+                  <v-col cols="1" class="cols">
+                    <v-icon class="icon">{{event.categoryIcon}}</v-icon>
+                  </v-col>
+                  <div v-if="!currentUserIsOrganiser(event)" class="subtitle-2 organiser">by {{event.organiserFirstName}}</div>
+                  <v-row v-if="currentUserIsOrganiser(event)" class="subtitle-2 organiser">
+                    by you
+                    <v-row class="actions">
+                      <Edit :event="event"/>
+                      <Delete :event="event"/>
+                    </v-row>
                   </v-row>
-                </v-row>
-              </v-card-title>
-              <v-divider class="divider" dark></v-divider>
-              <v-card-text>
-                <div class="white--text">{{event.localization}}</div>
-                <div class="white--text">{{event.startDate}} - {{event.endDate}}</div>
-                <div class="description">{{event.description}}</div>
-              </v-card-text>
-            </v-card>
-          </v-col>
+                </v-card-title>
+                <v-divider class="divider" dark></v-divider>
+                <v-card-text>
+                  <div class="white--text">{{event.localization}}</div>
+                  <div class="white--text">{{event.startDate}} - {{event.endDate}}</div>
+                  <div class="description">{{event.description}}</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+          <v-row class="grid" v-if="currentUserEventsShown">
+            <v-col
+              v-for="event in currentUserEvents"
+              v-bind:key="event.id"
+              cols="3"
+            >
+              <v-card color="primary" dark height="240">
+                <v-card-title class="title">
+                  <v-col cols="11" class="cols">
+                    {{event.name}}
+                  </v-col>
+                  <v-col cols="1" class="cols">
+                    <v-icon class="icon">{{event.categoryIcon}}</v-icon>
+                  </v-col>
+                  <div v-if="!currentUserIsOrganiser(event)" class="subtitle-2 organiser">by {{event.organiserFirstName}}</div>
+                  <v-row v-if="currentUserIsOrganiser(event)" class="subtitle-2 organiser">
+                    by you
+                    <v-row class="actions">
+                      <Edit :event="event"/>
+                      <Delete :event="event"/>
+                    </v-row>
+                  </v-row>
+                </v-card-title>
+                <v-divider class="divider" dark></v-divider>
+                <v-card-text>
+                  <div class="white--text">{{event.localization}}</div>
+                  <div class="white--text">{{event.startDate}} - {{event.endDate}}</div>
+                  <div class="description">{{event.description}}</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
         </v-row>
       </v-col>
     </v-row>
@@ -68,7 +116,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 import Add from './components/Add';
 import Edit from './components/Edit';
@@ -77,7 +125,8 @@ import Delete from './components/Delete';
 export default {
   name: 'Events',
   data: () => ({
-
+    currentUserEventsShown: false,
+    category: null,
   }),
   components: {
     Add,
@@ -85,10 +134,11 @@ export default {
     Delete,
   },
   computed: {
-    ...mapGetters(['events', 'currentUser']),
+    ...mapGetters(['events', 'filteredEvents', 'currentUser', 'currentUserEvents', 'hobbyCategories']),
   },
   methods: {
     ...mapActions(['getEvents', 'getHobbyCategories', 'getUserDetails', 'getCurrentUserEvents']),
+    ...mapMutations(['filterEvents']),
     currentUserIsOrganiser(event) {
       if (this.currentUser) {
         return event.organiserId === this.currentUser.id;
@@ -96,17 +146,22 @@ export default {
         return false;
       }
     },
+    filter() {
+      this.filterEvents(this.category);
+    },
     async showCurrentUserEvents() {
-      await this.getCurrentUserEvents(this.currentUser.id);
+      this.currentUserEventsShown = true;
     },
     async getAllEvents() {
       await this.getEvents();
+      this.currentUserEventsShown = false;
     },
   },
   async created() {
     await this.getEvents();
     await this.getUserDetails();
     await this.getHobbyCategories();
+    await this.getCurrentUserEvents(this.currentUser.id);
   },
 }
 </script>
@@ -139,5 +194,14 @@ export default {
 }
 .organiser {
   margin-left: 5px;
+}
+.grid {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.select {
+  width: 200px;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 </style>

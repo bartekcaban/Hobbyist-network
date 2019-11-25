@@ -18,8 +18,12 @@ export default {
   },
   setEvents(state, events) {
     state.events = events;
+    state.filteredEvents = events;
   },
   setCurrentUserEvents(state, events) {
     state.currentUserEvents = events;
   },
+  filterEvents(state, category) {
+    state.filteredEvents = state.events.filter(event => event.categoryId = category);
+  }
 };

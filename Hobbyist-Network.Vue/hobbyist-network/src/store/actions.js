@@ -55,7 +55,7 @@ export default {
       event.startDate = dateTime(event.startDate);
       event.endDate = dateTime(event.endDate);
       });
-    commit('setEvents', result);
+    commit('setCurrentUserEvents', result);
   },
   async addEvent(state, event) {
     await service.addEvent(event);

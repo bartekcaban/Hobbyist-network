@@ -53,10 +53,11 @@ export default {
     event: Object,
   },
   methods: {
-    ...mapActions(['deleteEvent', 'getEvents']),
+    ...mapActions(['deleteEvent', 'getEvents', 'getCurrentUserEvents']),
     async deleteE() {
       await this.deleteEvent(this.event.id);
       await this.getEvents();
+      await this.getCurrentUserEvents(this.currentUser.id);
       this.cancel();
     },
     cancel() {

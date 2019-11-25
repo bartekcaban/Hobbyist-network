@@ -208,7 +208,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['editEvent', 'getEvents']),
+    ...mapActions(['editEvent', 'getEvents', 'getCurrentUserEvents']),
     saveStartDate() {
       this.datePickerStart = false;
       this.timePickerStart = true;
@@ -242,6 +242,7 @@ export default {
     async cancel() {
       this.dialog = false;
       await this.getEvents();
+      await this.getCurrentUserEvents(this.currentUser.id);
     },
   },
 }
