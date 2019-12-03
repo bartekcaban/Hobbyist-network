@@ -66,4 +66,12 @@ export default {
   async deleteEvent(state, id) {
     await service.deleteEvent(id);
   },
+  async getUsersForCurrentUser({ commit }, id) {
+    const result = await service.getUsersForCurrentUser(id);
+    commit('setUsers', result);
+  },
+  async getMatchedUsersForCurrentUser({ commit }, id) {
+    const result = await service.getMatchedUsersForCurrentUser(id);
+    commit('setMatchedUsers', result);
+  },
 };

@@ -78,5 +78,17 @@ namespace Hobbyist_Network.WebAPI.Controllers
 
             return Ok(new { message = "Password changed" });
         }
+
+        [HttpGet("get-users")]
+        public IActionResult GetUsers([FromQuery] GetUsersQuery query)
+        {
+            var user = _mediator.Send(query);
+
+            if (user.Result == null)
+            {
+                return BadRequest("Error");
+            }
+            return Ok(user);
+        }
     }
 }

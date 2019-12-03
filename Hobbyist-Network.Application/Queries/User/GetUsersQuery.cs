@@ -6,7 +6,8 @@ using System.Text;
 
 namespace Hobbyist_Network.Application.Queries.User
 {
-    public class GetUsersQuery : IRequest<IList<UserDto>>
+    public class GetUsersQuery : IRequest<IEnumerable<UserDto>>
     {
+        public Guid UserId { get; set; }
     }
 }

@@ -6,5 +6,6 @@ namespace Hobbyist_Network.Application.DTOs.Contact
 {
     public class ContactDto
     {
+        DateTime Date { get; set; }
     }
 }

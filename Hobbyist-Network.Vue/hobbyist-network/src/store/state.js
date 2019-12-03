@@ -4,4 +4,6 @@ export default {
   events: [],
   filteredEvents: [],
   currentUserEvents: [],
+  users: [],
+  matchedUsers: [],
 };

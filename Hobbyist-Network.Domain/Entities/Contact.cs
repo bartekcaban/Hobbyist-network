@@ -15,13 +15,17 @@ namespace Hobbyist_Network.Domain.Entities
         {
             UserId = userId;
             MatchedUserId = matchedUserId;
-            Approved = false;
         }
 
-        public void Match()
+        public void Match(bool approved)
         {
             Date = DateTime.UtcNow;
-            Approved = true;
+            Approved = approved;
+        }
+
+        public void Delete()
+        {
+            Approved = false;
         }
 
         private Contact() { }

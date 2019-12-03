@@ -25,5 +25,11 @@ export default {
   },
   filterEvents(state, category) {
     state.filteredEvents = state.events.filter(event => event.categoryId = category);
-  }
+  },
+  setUsers(state, users) {
+    state.users = users;
+  },
+  setMatchedUsers(state, users) {
+    state.matchedUsers = users;
+  },
 };

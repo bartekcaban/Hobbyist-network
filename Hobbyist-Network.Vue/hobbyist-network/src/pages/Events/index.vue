@@ -5,9 +5,9 @@
         <v-row>
           <v-col cols="12">
             <v-toolbar
-            color="secondary"
-            dark
-            class="toolbar"
+              color="secondary"
+              dark
+              class="toolbar"
             >
               <v-toolbar-title>Wydarzenia</v-toolbar-title>
               <v-spacer></v-spacer>

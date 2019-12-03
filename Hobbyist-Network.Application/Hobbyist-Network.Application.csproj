@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Contact\" />
     <Folder Include="Queries\Hobby\" />
   </ItemGroup>
 
