@@ -4,14 +4,16 @@ using Hobbyist_Network.Domain.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hobbyist_Network.Domain.Migrations
 {
     [DbContext(typeof(Hobbyist_NetworkDbContext))]
-    partial class Hobbyist_NetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191203194508_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
