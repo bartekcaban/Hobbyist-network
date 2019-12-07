@@ -74,4 +74,16 @@ export default {
     const result = await service.getMatchedUsersForCurrentUser(id);
     commit('setMatchedUsers', result);
   },
+  async match({ commit }, data) {
+    await service.match(data);
+    commit('deleteUserFromList', data.matchedUserId);
+  },
+  async notMatch({ commit }, data) {
+    await service.notMatch(data);
+    commit('deleteUserFromList', data.matchedUserId);
+  },
+  async deleteContact({ commit }, id) {
+    await service.deleteContact(id);
+    commit('deleteContactFromList', id);
+  }
 };

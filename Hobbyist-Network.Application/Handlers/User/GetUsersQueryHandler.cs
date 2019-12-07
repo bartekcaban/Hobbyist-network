@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hobbyist_Network.Application.Handlers.User
@@ -21,7 +22,22 @@ namespace Hobbyist_Network.Application.Handlers.User
 
         protected override IEnumerable<UserDto> Handle(GetUsersQuery request)
         {
-            var users = _dbContext.Users;
+            var users = _dbContext.Users
+                .Include(u => u.Hobbies)
+                .ThenInclude(h => h.Category)
+                .Where(u => u.Id != request.Id);
+
+            var contacts = _dbContext.Contacts.Where(c => c.MatchedUserId == request.Id || c.UserId == request.Id);
+            foreach(var user in users)
+            {
+                foreach(var contact in contacts)
+                {
+                    if(user.Id == contact.UserId || user.Id == contact.MatchedUserId)
+                    {
+                        users = users.Where(u => u.Id != user.Id);
+                    }
+                }
+            }
 
             return users == null ? null : Mapper.Map<IEnumerable<UserDto>>(users);
         }

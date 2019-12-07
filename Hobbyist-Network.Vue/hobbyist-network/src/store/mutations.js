@@ -32,4 +32,10 @@ export default {
   setMatchedUsers(state, users) {
     state.matchedUsers = users;
   },
+  deleteUserFromList(state, id) {
+    state.users = state.users.filter(u => u.id !== id);
+  },
+  deleteContactFromList(state, id) {
+    state.matchedUsers = state.matchedUsers.filter(m => m.id !== id);
+  },
 };

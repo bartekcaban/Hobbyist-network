@@ -11,16 +11,12 @@ namespace Hobbyist_Network.Domain.Entities
         public User MatchedUser { get; set; }
         public Guid MatchedUserId { get; set; }
 
-        public Contact(Guid id, Guid userId, Guid matchedUserId) : base(id)
-        {
-            UserId = userId;
-            MatchedUserId = matchedUserId;
-        }
-
-        public void Match(bool approved)
+        public Contact(Guid id, Guid userId, Guid matchedUserId, bool approved) : base(id)
         {
             Date = DateTime.UtcNow;
             Approved = approved;
+            UserId = userId;
+            MatchedUserId = matchedUserId;
         }
 
         public void Delete()

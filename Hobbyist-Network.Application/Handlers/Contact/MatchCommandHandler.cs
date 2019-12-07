@@ -5,18 +5,18 @@ using System;
 
 namespace Hobbyist_Network.Application.Handlers.Contact
 {
-    public class AddContactCommandHandler : RequestHandler<AddContactCommand>
+    public class MatchCommandHandler : RequestHandler<MatchCommand>
     {
         private Hobbyist_NetworkDbContext _dbContext;
 
-        public AddContactCommandHandler(Hobbyist_NetworkDbContext dbContext)
+        public MatchCommandHandler(Hobbyist_NetworkDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        protected override void Handle(AddContactCommand request)
+        protected override void Handle(MatchCommand request)
         {
-            var contact = new Domain.Entities.Contact(Guid.NewGuid(), request.UserId, request.MatchedUserId);
+            var contact = new Domain.Entities.Contact(Guid.NewGuid(), request.UserId, request.MatchedUserId, true);
             _dbContext.Contacts.Add(contact);
 
             if (_dbContext.SaveChanges() == 0)

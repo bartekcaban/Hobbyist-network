@@ -8,6 +8,6 @@ namespace Hobbyist_Network.Application.Queries.User
 {
     public class GetUsersQuery : IRequest<IEnumerable<UserDto>>
     {
-        public Guid UserId { get; set; }
+        public Guid Id { get; set; }
     }
 }

@@ -131,4 +131,39 @@ export default {
     });
     return result.data.result;
   },
+  async getUsersForCurrentUser(id) {
+    const resource = '/user/get-users';
+    const result = await client.get(resource, {
+      id
+    });
+    return result.data.result;
+  },
+  async getMatchedUsersForCurrentUser(id) {
+    const resource = '/contact/get';
+    const result = await client.get(resource, {
+      id
+    });
+    return result.data.result;
+  },
+  async notMatch(data) {
+    const resource = '/contact/not-match';
+    const result = await client.post(resource, {
+      userId: data.userId,
+      matchedUserId: data.matchedUserId,
+    });
+    return result.data.result;
+  },
+  async match(data) {
+    const resource = '/contact/match';
+    const result = await client.post(resource, {
+      userId: data.userId,
+      matchedUserId: data.matchedUserId,
+    });
+    return result.data.result;
+  },
+  async deleteContact(id) {
+    const resource = `/contact/delete?id=${id}`;
+    const result = await client.post(resource);
+    return result.data.result;
+  },
 };

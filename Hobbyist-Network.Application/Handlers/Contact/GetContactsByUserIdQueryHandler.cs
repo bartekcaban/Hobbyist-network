@@ -22,7 +22,7 @@ namespace Hobbyist_Network.Application.Handlers.Contact
         protected override IEnumerable<ContactDto> Handle(GetContactsByUserIdQuery request)
         {
             var contacts = _dbContext.Contacts
-                .Where(c => c.UserId == request.UserId || c.MatchedUserId == request.UserId);
+                .Where(c => (c.UserId == request.UserId || c.MatchedUserId == request.UserId) && c.Approved == true);
 
             return contacts == null ? null : Mapper.Map<IEnumerable<ContactDto>>(contacts); ;
         }

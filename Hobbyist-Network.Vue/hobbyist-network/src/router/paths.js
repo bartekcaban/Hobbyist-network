@@ -24,5 +24,10 @@ export default [
     name: 'People',
     view: 'People',
   },
+  {
+    path: '/matches',
+    name: 'Matches',
+    view: 'Matches',
+  },
 ];
   

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Hobbyist_Network.Application.Commands.Contact
 {
-    public class MatchContactCommand: IRequest
+    public class NotMatchCommand: IRequest
     {
-        public Guid Id { get; set; }
-        public bool Approved { get; set; }
+        public Guid UserId { get; set; }
+        public Guid MatchedUserId { get; set; }
     }
 }

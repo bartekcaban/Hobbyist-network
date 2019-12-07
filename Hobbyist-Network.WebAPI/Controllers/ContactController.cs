@@ -21,8 +21,8 @@ namespace Hobbyist_Network.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("add")]
-        public IActionResult Add([FromBody] AddContactCommand command)
+        [HttpPost("not-match")]
+        public IActionResult Add([FromBody] NotMatchCommand command)
         {
             var commandResult = _mediator.Send(command);
 
@@ -31,11 +31,11 @@ namespace Hobbyist_Network.WebAPI.Controllers
                 return BadRequest(commandResult.Exception.InnerException.Message);
             }
 
-            return Ok(new { message = "Contact added" });
+            return Ok(new { message = "Not matched" });
         }
 
         [HttpPost("match")]
-        public IActionResult Match([FromBody] MatchContactCommand command)
+        public IActionResult Match([FromBody] MatchCommand command)
         {
             var commandResult = _mediator.Send(command);
 
@@ -44,7 +44,7 @@ namespace Hobbyist_Network.WebAPI.Controllers
                 return BadRequest(commandResult.Exception.InnerException.Message);
             }
 
-            return Ok(new { message = "Contact matched" });
+            return Ok(new { message = "Matched" });
         }
 
         [HttpDelete("delete")]

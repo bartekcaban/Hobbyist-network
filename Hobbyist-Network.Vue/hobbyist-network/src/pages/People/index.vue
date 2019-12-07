@@ -18,13 +18,14 @@
         </v-toolbar>
       </v-col>
     </v-row>
-    <v-row class="card">
+    <v-row v-if="users[0]" class="card">
       <v-btn
         x-large
         icon
         text
         color="secondary"
         class="arrow-left"
+        @click="notMatchUser"
       >
         <v-icon>
           mdi-arrow-left
@@ -42,17 +43,17 @@
             <v-col cols="8">
               <v-row>
                 <v-col class="name">
-                  {{ currentUser.firstName }}, {{ age(currentUser.dateOfBirth) }}
+                  {{ users[0].firstName }}, {{ age(users[0].dateOfBirth) }}
                 </v-col>
               </v-row>
               <v-row>
                 <v-col class="city">
-                  {{ currentUser.city }}
+                  {{ users[0].city }}
                 </v-col>
               </v-row>
               <v-row>
                 <v-col class="description">
-                  {{ currentUser.description }}
+                  {{ users[0].description }}
                 </v-col>
               </v-row>
             </v-col>
@@ -62,7 +63,7 @@
               <v-tooltip
                 :disabled="!hobby.description"
                 top
-                v-for="hobby in currentUser.hobbies"
+                v-for="hobby in users[0].hobbies"
                 v-bind:key="hobby.id"
               >
                 <template v-slot:activator="{ on }">
@@ -98,15 +99,15 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-if="currentUser.instagram">
+            <v-col v-if="users[0].instagram">
               <v-icon class="instagram-icon">mdi-instagram</v-icon>
-              <a :href="currentUser.instagram">{{currentUser.instagram}}</a>
+              <a :href="users[0].instagram">{{users[0].instagram}}</a>
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-if="currentUser.facebook">
+            <v-col v-if="users[0].facebook">
               <v-icon class="facebook-icon">mdi-facebook</v-icon>
-              <a :href="currentUser.instagram">{{currentUser.facebook}}</a>
+              <a :href="users[0].instagram">{{users[0].facebook}}</a>
             </v-col>
           </v-row>
         </v-card-text>
@@ -117,11 +118,19 @@
         text
         color="primary"
         class="arrow-right"
+        @click="matchUser"
       >
         <v-icon>
           mdi-arrow-right
         </v-icon>
       </v-btn>
+    </v-row>
+    <v-row v-if="!users[0]">
+      <v-card class="card-empty">
+        <v-card-text>
+          Brak osób do pokazania
+        </v-card-text>
+      </v-card>
     </v-row>
   </v-row>
 </template>
@@ -138,13 +147,22 @@ export default {
     ...mapGetters(['users', 'currentUser']),
   },
   methods: {
-    ...mapActions(['getUsersForCurrentUser', 'getUserDetails']),
+    ...mapActions(['getUsersForCurrentUser', 'getUserDetails', 'match', 'notMatch']),
     showMatchedUsers() {
+      this.$router.push({
+        name: 'Matches',
+      });
     },
     age(dateOfBirth) {
       const date = new Date(dateOfBirth);
       const year = date.getFullYear();
       return new Date().getFullYear() - year;
+    },
+    matchUser() {
+      this.match({ userId: this.currentUser.id, matchedUserId: this.users[0].id });
+    },
+    notMatchUser() {
+      this.notMatch({ userId: this.currentUser.id, matchedUserId: this.users[0].id });
     },
   },
   async created() {
@@ -207,5 +225,9 @@ export default {
 .arrow-right {
   margin-left: 10px;
   margin-top: 20%;
+}
+.card-empty {
+  margin-left: 650px;
+  margin-top: 200px;
 }
 </style>
