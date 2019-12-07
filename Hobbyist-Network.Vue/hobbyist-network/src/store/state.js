@@ -6,4 +6,5 @@ export default {
   currentUserEvents: [],
   users: [],
   matchedUsers: [],
+  currentContact: null,
 };

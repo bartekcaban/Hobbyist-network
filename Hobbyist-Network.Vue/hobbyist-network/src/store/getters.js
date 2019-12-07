@@ -6,4 +6,5 @@ export default {
   events: state => state.events,
   users: state => state.users,
   matchedUsers: state => state.matchedUsers,
+  currentContact: state => state.currentContact,
 };

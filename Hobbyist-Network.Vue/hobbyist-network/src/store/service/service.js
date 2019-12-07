@@ -163,7 +163,7 @@ export default {
   },
   async deleteContact(id) {
     const resource = `/contact/delete?id=${id}`;
-    const result = await client.post(resource);
+    const result = await client.delete(resource);
     return result.data.result;
   },
 };

@@ -11,6 +11,22 @@
           <v-spacer></v-spacer>
           <v-btn
             text
+            v-if="cards"
+            class="button"
+            @click="showTable"
+          >
+            Pokaż tabele
+          </v-btn>
+          <v-btn
+            text
+            v-if="!cards"
+            class="button"
+            @click="showCards"
+          >
+            Pokaż karty
+          </v-btn>
+          <v-btn
+            text
             @click="showMatchedUsers"
           >
             Poznani
@@ -18,7 +34,7 @@
         </v-toolbar>
       </v-col>
     </v-row>
-    <v-row v-if="users[0]" class="card">
+    <v-row v-if="users[0] && cards" class="card">
       <v-btn
         x-large
         icon
@@ -125,12 +141,67 @@
         </v-icon>
       </v-btn>
     </v-row>
-    <v-row v-if="!users[0]">
+    <v-row v-if="!users[0] && cards">
       <v-card class="card-empty">
         <v-card-text>
           Brak osób do pokazania
         </v-card-text>
       </v-card>
+    </v-row>
+    <v-row v-if="!cards">
+      <v-col>
+        <v-data-table
+          :headers="headers"
+          :items="users"
+          no-data-text="Brak osób do pokazania"
+        >
+          <template v-slot:body="{ items }">
+            <tbody>
+              <tr v-for="(user, index) in items" :key="index">
+                <td>{{user.firstName}}</td>
+                <td>{{age(user.dateOfBirth)}}</td>
+                <td>{{user.city}}</td>
+                <td>
+                  <span
+                    class="hobby-icon"
+                    v-for="hobby in beginner(user.hobbies)"
+                    :key="hobby.id"
+                  >
+                    <v-icon>{{hobby.categoryIcon}}</v-icon>
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="hobby-icon"
+                    v-for="hobby in intermediate(user.hobbies)"
+                    :key="hobby.id"
+                  >
+                    <v-icon>{{hobby.categoryIcon}}</v-icon>
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="hobby-icon"
+                    v-for="hobby in upperIntermediate(user.hobbies)"
+                    :key="hobby.id"
+                  >
+                    <v-icon>{{hobby.categoryIcon}}</v-icon>
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="hobby-icon"
+                    v-for="hobby in professional(user.hobbies)"
+                    :key="hobby.id"
+                  >
+                    <v-icon>{{hobby.categoryIcon}}</v-icon>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-data-table>
+      </v-col>
     </v-row>
   </v-row>
 </template>
@@ -141,7 +212,16 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'People',
   data: () => ({
-
+    cards: true,
+    headers: [
+      { text: 'Imię', value: 'firstName' },
+      { text: 'Wiek', value: 'age' },
+      { text: 'Miasto', value: 'city' },
+      { text: 'Początkujący', value: '1' },
+      { text: 'Średnio zaawansowany', value: '2' },
+      { text: 'Bardzo zaawansowany', value: '3' },
+      { text: 'Profesjonalista', value: '4' },
+    ]
   }),
   computed: {
     ...mapGetters(['users', 'currentUser']),
@@ -164,6 +244,24 @@ export default {
     notMatchUser() {
       this.notMatch({ userId: this.currentUser.id, matchedUserId: this.users[0].id });
     },
+    showCards() {
+      this.cards = true;
+    },
+    showTable() {
+      this.cards = false;
+    },
+    beginner(hobbies) {
+      return hobbies.filter(f => f.level == 1);
+    },
+    intermediate(hobbies) {
+      return hobbies.filter(f => f.level == 2);
+    },
+    upperIntermediate(hobbies) {
+      return hobbies.filter(f => f.level == 3);
+    },
+    professional(hobbies) {
+      return hobbies.filter(f => f.level == 4);
+    },
   },
   async created() {
     await this.getUserDetails();
@@ -182,6 +280,9 @@ export default {
 }
 .toolbar {
   width: 91rem;
+}
+.button {
+  margin-right: 10px;
 }
 .card {
   margin-left: 30%;
@@ -229,5 +330,8 @@ export default {
 .card-empty {
   margin-left: 650px;
   margin-top: 200px;
+}
+.hobby-icon {
+  margin-right: 5px;
 }
 </style>

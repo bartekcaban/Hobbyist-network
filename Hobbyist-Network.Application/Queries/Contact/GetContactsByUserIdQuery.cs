@@ -8,6 +8,6 @@ namespace Hobbyist_Network.Application.Queries.Contact
 {
     public class GetContactsByUserIdQuery :IRequest<IEnumerable<ContactDto>>
     {
-        public Guid UserId { get; set; }
+        public Guid Id { get; set; }
     }
 }

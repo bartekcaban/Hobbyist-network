@@ -38,4 +38,7 @@ export default {
   deleteContactFromList(state, id) {
     state.matchedUsers = state.matchedUsers.filter(m => m.id !== id);
   },
+  setCurrentContact(state, contact) {
+    state.currentContact = contact;
+  },
 };
