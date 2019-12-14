@@ -28,6 +28,11 @@ namespace Hobbyist_Network.Application.Handlers.User
                 .Where(u => u.Id != request.Id);
 
             var contacts = _dbContext.Contacts.Where(c => c.MatchedUserId == request.Id || c.UserId == request.Id);
+
+            var currentUser = _dbContext.Users.Include(u => u.Hobbies).Where(u => u.Id == request.Id).SingleOrDefault();
+
+            var dictionary = new List<GetUsersDto>();
+
             foreach(var user in users)
             {
                 foreach(var contact in contacts)
@@ -38,8 +43,27 @@ namespace Hobbyist_Network.Application.Handlers.User
                     }
                 }
             }
+            foreach(var user in users)
+            {
+                var points = 0;
 
-            return users == null ? null : Mapper.Map<IEnumerable<UserDto>>(users);
+                foreach(var hobby in user.Hobbies)
+                {
+                    foreach (var currentHobby in currentUser.Hobbies)
+                    {
+                        if (hobby.CategoryId == currentHobby.CategoryId)
+                            points = points + 2;
+                        if (hobby.Level == currentHobby.Level)
+                            points = points + 1;
+                    }
+                }
+
+                dictionary.Add(new GetUsersDto(points, user));
+            }
+
+            var sorted = dictionary.OrderByDescending(d => d.Key).ToList();
+
+            return sorted == null ? null : Mapper.Map<IEnumerable<UserDto>>(sorted);
         }
     }
 }
